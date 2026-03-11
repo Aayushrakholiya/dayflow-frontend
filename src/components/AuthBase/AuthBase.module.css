@@ -1,0 +1,82 @@
+/* ============================================================
+   AuthBase.module.css
+   Layout and structure only.
+   Every color is handled by MUI's ThemeProvider — no hex values here.
+   ============================================================ */
+
+/* ── Full-screen split layout ── */
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ── Left: brand orange panel ── */
+.logoSection {
+  width: 60%;
+  min-width: 60%;
+  max-width: 60%;
+  /* Brand orange is intentionally NOT theme-variable — stays vivid in both modes */
+  background: linear-gradient(135deg, #f97416 0%, #f97416 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logoImage {
+  width: 1000px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Right: form panel — background color set via sx in AuthBaseLayout ── */
+.formSection {
+  position: relative;
+  width: 40%;
+  min-width: 40%;
+  max-width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow-y: auto;
+  transition: background-color 0.25s ease;
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .logoSection { width: 50%; min-width: 50%; max-width: 50%; }
+  .formSection  { width: 50%; min-width: 50%; max-width: 50%; }
+}
+
+@media (max-width: 768px) {
+  .container    { flex-direction: column; }
+
+  .logoSection  {
+    width: 100%; min-width: 100%; max-width: 100%;
+    height: 30vh; min-height: 200px;
+  }
+  .logoImage    { width: 300px; }
+
+  .formSection  {
+    width: 100%; min-width: 100%; max-width: 100%;
+    height: 70vh; padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoSection  { height: 25vh; min-height: 150px; }
+  .logoImage    { width: 200px; }
+  .formSection  { height: 75vh; padding: 15px; }
+}

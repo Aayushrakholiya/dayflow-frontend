@@ -1,0 +1,771 @@
+/* calendar.module.css*/
+/* ─── Shell ───────────────────────────────────────────────────────────────── */
+
+.calendar {
+  width: calc(100vw - 348px);
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  overflow: hidden;
+  border-left: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 0 20px 20px 0;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  box-shadow:
+    inset 1px 0 0 rgba(255, 255, 255, 0.6),
+    -4px 0 32px rgba(255, 92, 47, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.gridWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 24px;
+  background: rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.leftControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.todayButton {
+  padding: 7px 16px;
+  border: 3px solid rgba(255, 92, 47, 0.28);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #cc3d14;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.todayButton:hover {
+  background: rgba(255, 92, 47, 0.1);
+  border-color: rgba(255, 92, 47, 0.45);
+  color: #ff5c2f;
+  box-shadow:
+    0 0 16px rgba(255, 92, 47, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+.todayButton:active {
+  transform: scale(0.97);
+}
+
+.navButtons {
+  display: flex;
+  gap: 4px;
+}
+
+.navButton {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.07);
+}
+.navButton:hover {
+  border-color: rgba(255, 92, 47, 0.32);
+  background: rgba(255, 255, 255, 0.75);
+  color: #ff5c2f;
+  box-shadow:
+    0 0 10px rgba(255, 92, 47, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.navButton:active {
+  transform: scale(0.9);
+}
+
+.monthTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1c1008;
+  letter-spacing: -0.025em;
+}
+
+.rightControls {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.controlLabel {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7d7d7d;
+}
+
+.controlField {
+  min-width: 155px;
+  padding: 7px 28px 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+.controlField:hover {
+  border-color: rgba(255, 92, 47, 0.28);
+  background: rgba(255, 255, 255, 0.72);
+}
+.todayButton:focus-visible,
+.navButton:focus-visible,
+.controlField:focus {
+  outline: none;
+  border-color: #ff5c2f;
+  box-shadow: 0 0 0 3px rgba(255, 92, 47, 0.14);
+}
+
+@media (max-width: 1024px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rightControls {
+    width: 100%;
+  }
+}
+
+/* ─── Date picker popover ─────────────────────────────────────────────────── */
+
+.datePickerTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.datePickerContent {
+  background: rgba(255, 250, 244, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 22px;
+  box-shadow:
+    0 28px 70px rgba(255, 92, 47, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  padding: 16px;
+  width: 305px;
+  z-index: 9999;
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  transform-origin: top right;
+  animation: dpPopIn 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  color: #1c1008;
+}
+@keyframes dpPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.datePickerTopBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.datePickerTodayBtn {
+  border: 1px solid rgba(255, 92, 47, 0.28);
+  background: rgba(255, 92, 47, 0.08);
+  color: #cc3d14;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 10px;
+  transition: all 0.15s;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+.datePickerTodayBtn:hover {
+  background: rgba(255, 92, 47, 0.14);
+  border-color: rgba(255, 92, 47, 0.42);
+  color: #ff5c2f;
+}
+
+.datePickerCloseBtn {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.65);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 10px;
+  line-height: 1;
+  color: rgba(42, 26, 14, 0.42);
+  transition: all 0.15s;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.datePickerCloseBtn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #1c1008;
+}
+
+.dayPickerCell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dayPickerDots {
+  position: absolute;
+  bottom: 3px;
+  display: flex;
+  gap: 2px;
+}
+.dayPickerDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+
+/* ─── Month view ──────────────────────────────────────────────────────────── */
+
+.monthWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 253, 250, 0.05);
+}
+
+.monthWeekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.monthWeekday {
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 92, 47, 0.6);
+}
+
+.monthGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  background: transparent;
+}
+
+.monthCell {
+  border-right: 1px solid rgba(0, 0, 0, 0.045);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.045);
+  padding: 10px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.monthCell:nth-child(7n) {
+  border-right: none;
+}
+.monthCellMuted {
+  color: rgba(42, 26, 14, 0.28);
+  background: rgba(255, 255, 255, 0.02);
+}
+.monthCell:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.monthDayNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1c1008;
+}
+.monthDayNumberToday {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  background: #ff5c2f;
+  color: #fff5ee;
+  box-shadow:
+    0 0 16px rgba(255, 92, 47, 0.5),
+    0 2px 6px rgba(255, 92, 47, 0.32);
+}
+
+/* Month event chips */
+.monthEventChip {
+  margin-top: 2px;
+  padding: 2px 7px;
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #1c1008;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  box-shadow:
+    0 1px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.monthChipText {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.monthChipDelete {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition:
+    opacity 0.15s,
+    background 0.15s;
+  padding: 0;
+}
+.monthChipDeleteIcon {
+  width: 9px;
+  height: 9px;
+  object-fit: contain;
+  filter: brightness(0) invert(0.12);
+}
+.monthEventChip:hover .monthChipDelete {
+  opacity: 1;
+}
+.monthChipDelete:hover {
+  background: rgba(210, 30, 30, 0.6);
+}
+.monthChipDelete:hover .monthChipDeleteIcon {
+  filter: brightness(0) invert(1);
+}
+.monthEventMore {
+  margin-top: 2px;
+  font-size: 10px;
+  color: #ff5c2f;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+/* ─── Time grid — column headers ──────────────────────────────────────────── */
+
+.gridHeader {
+  display: grid;
+  grid-template-columns: 48px repeat(7, 1fr);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 1px 0 rgba(255, 92, 47, 0.05),
+    0 2px 12px rgba(0, 0, 0, 0.03);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.gridHeaderDay {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 1px 0 rgba(255, 92, 47, 0.05),
+    0 2px 12px rgba(0, 0, 0, 0.03);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.gridHeaderSpacer {
+  background: transparent;
+}
+
+.dayHeaderCell,
+.dayHeaderCellSingle {
+  padding: 14px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+}
+.dayHeaderCell:last-child {
+  border-right: none;
+}
+
+.dayLabel {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(42, 26, 14, 0.38);
+}
+.dayNumber {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 300;
+  color: #1c1008;
+}
+.dayLabelToday {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: "black";
+}
+.dayNumberToday {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ff5c2f;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ─── Time grid — scrollable body ────────────────────────────────────────── */
+
+.gridBody {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: rgba(255, 253, 250, 0.05);
+  position: relative;
+}
+.gridContent {
+  position: relative;
+}
+
+.timeRow {
+  display: grid;
+  grid-template-columns: 48px repeat(7, 1fr);
+  min-height: 60px;
+}
+.timeRowDay {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  min-height: 60px;
+}
+
+.timeCell {
+  padding: 6px 6px 0 2px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #7d7d7d;
+  background: rgba(255, 252, 248, 0.05);
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.dayCell {
+  background: rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  cursor: crosshair;
+}
+.dayCell:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.dayCell:last-child {
+  border-right: none;
+}
+.dayCellSingle {
+  border-right: none;
+}
+
+.gridBody::-webkit-scrollbar {
+  width: 4px;
+}
+.gridBody::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+}
+.gridBody::-webkit-scrollbar-thumb {
+  background: rgba(255, 92, 47, 0.18);
+  border-radius: 99px;
+}
+.gridBody::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 92, 47, 0.35);
+}
+
+/* ─── Drag overlay ────────────────────────────────────────────────────────── */
+
+.dragOverlay {
+  position: absolute;
+  background: rgba(255, 92, 47, 0.1);
+  border: 1.5px solid rgba(255, 92, 47, 0.48);
+  border-radius: 12px;
+  z-index: 3;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: height 0.04s ease;
+  box-shadow:
+    0 0 28px rgba(255, 92, 47, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* ─── Event blocks ────────────────────────────────────────────────────────── */
+
+.eventBlock {
+  position: absolute;
+  border-radius: 12px;
+  padding: 6px 10px;
+  overflow: hidden;
+  z-index: 2;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid rgba(255, 255, 255, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition:
+    box-shadow 0.16s ease,
+    transform 0.16s ease;
+}
+.eventBlock::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.18s;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.eventBlockCompact {
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  overflow: hidden;
+}
+
+.eventBlock:hover {
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.13),
+    0 2px 8px rgba(0, 0, 0, 0.07),
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(107, 114, 128, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(-1px) scale(1.006);
+}
+.eventBlock:hover::after {
+  opacity: 1;
+}
+.eventBlock:hover .eventDeleteBtn {
+  opacity: 1;
+}
+.eventBlock:active {
+  transform: scale(0.99);
+}
+
+.eventDeleteBtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition:
+    opacity 0.15s,
+    background 0.15s;
+  padding: 0;
+  flex-shrink: 0;
+}
+.eventBlockCompact .eventDeleteBtn {
+  position: static;
+  width: 14px;
+  height: 14px;
+  order: 3;
+  margin-left: auto;
+}
+.eventDeleteIcon {
+  width: 11px;
+  height: 11px;
+  object-fit: contain;
+  filter: brightness(0) invert(0.1);
+}
+.eventBlockCompact .eventDeleteIcon {
+  width: 9px;
+  height: 9px;
+}
+.eventDeleteBtn:hover {
+  background: rgba(200, 30, 30, 0.65);
+}
+.eventDeleteBtn:hover .eventDeleteIcon {
+  filter: brightness(0) invert(1);
+}
+
+.eventBlockTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1c1008;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+  line-height: 1.3;
+}
+.eventBlockCompact .eventBlockTitle {
+  font-size: 11px;
+  padding-right: 0;
+  flex-shrink: 1;
+  min-width: 0;
+}
+.eventBlockTime {
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(28, 16, 8, 0.52);
+  margin-top: 2px;
+}
+.eventBlockTimeInline {
+  font-size: 10px;
+  color: rgba(28, 16, 8, 0.52);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Clickable location line inside an event block */
+.eventBlockLocation {
+  display: block;
+  font-size: 9px;
+  font-weight: 500;
+  color: rgba(28, 16, 8, 0.58);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+  transition:
+    color 0.15s,
+    opacity 0.15s;
+  padding-right: 20px;
+}
+.eventBlockLocation:hover {
+  color: #ff5c2f;
+  opacity: 1;
+}
+
+/* ─── Current-time indicator ──────────────────────────────────────────────── */
+
+.timeIndicator {
+  position: absolute;
+  height: 0;
+  border-top: 2px solid #ff5c2f;
+  z-index: 5;
+  pointer-events: none;
+  box-shadow:
+    0 0 8px rgba(255, 92, 47, 0.45),
+    0 0 20px rgba(255, 92, 47, 0.14);
+}
+.timeIndicatorDot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff5c2f;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  box-shadow:
+    0 0 10px rgba(255, 92, 47, 0.65),
+    0 0 22px rgba(255, 92, 47, 0.28);
+}

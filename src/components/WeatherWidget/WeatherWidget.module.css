@@ -1,0 +1,342 @@
+
+/* The invisible button that wraps the pill and acts as the popover trigger. */
+.pillWrapper {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 11px;
+  transition: opacity 0.15s ease;
+}
+
+.pillWrapper:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+/* The visible chip shown in the calendar header. */
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 92, 47, 0.28);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.90);
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pillWrapper:hover .pill {
+  background: rgba(255, 92, 47, 0.08);
+  border-color: rgba(255, 92, 47, 0.42);
+  box-shadow:
+    0 0 14px rgba(255, 92, 47, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.pillWrapper:active .pill {
+  transform: scale(0.97);
+}
+
+/* Small green dot that pulses to show the data is live. */
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 5px rgba(34, 197, 94, 0.55);
+  flex-shrink: 0;
+  animation: wxPulse 2s infinite;
+}
+
+@keyframes wxPulse {
+  0%, 100% { opacity: 1.00; }
+  50% { opacity: 0.30; }
+}
+
+.pillIcon {
+  font-size: 16px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.12));
+}
+
+.pillTemp {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1c1008;
+  letter-spacing: -0.02em;
+}
+
+.pillDesc {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(42, 26, 14, 0.50);
+  white-space: nowrap;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Shimmer placeholder shown while weather data is loading. */
+.pillSkeleton {
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.70);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.skeletonInner {
+  width: 90px;
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 200, 170, 0.20) 25%,
+    rgba(255, 200, 170, 0.42) 50%,
+    rgba(255, 200, 170, 0.20) 75%
+  );
+  background-size: 200% 100%;
+  animation: wxShimmer 1.6s infinite;
+}
+
+@keyframes wxShimmer {
+  to { background-position: -200% 0; }
+}
+
+/* Floating panel that appears when the user clicks the pill. */
+.popoverContent {
+  background: rgba(255, 250, 244, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 22px;
+  box-shadow:
+    0 28px 70px rgba(255, 92, 47, 0.10),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  width: 300px;
+  z-index: 9999;
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  transform-origin: top right;
+  animation: wxPopIn 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  color: #1c1008;
+  overflow: hidden;
+}
+
+@keyframes wxPopIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Container for all card content with consistent vertical spacing. */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+/* Top row of the card: city name on left, controls on right. */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cardTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Larger version of the live dot used in the card header. */
+.liveDotLarge {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.55);
+  flex-shrink: 0;
+  animation: wxPulse 2s infinite;
+}
+
+.cardCity {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1c1008;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.cardHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Button that switches between Celsius and Fahrenheit. */
+.unitToggle {
+  border: 1px solid rgba(255, 92, 47, 0.28);
+  background: rgba(255, 92, 47, 0.08);
+  color: #cc3d14;
+  font-weight: 700;
+  font-size: 11px;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 5px 11px;
+  border-radius: 10px;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.70);
+}
+
+.unitToggle:hover {
+  background: rgba(255, 92, 47, 0.14);
+  border-color: rgba(255, 92, 47, 0.42);
+  color: #ff5c2f;
+}
+
+/* X button that closes the popover. */
+.closeBtn {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.65);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 5px 9px;
+  border-radius: 10px;
+  line-height: 1;
+  color: rgba(42, 26, 14, 0.42);
+  transition: background 0.15s ease, color 0.15s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.90);
+  font-family: inherit;
+}
+
+.closeBtn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #1c1008;
+}
+
+/* Row with the large weather icon next to the temperature and condition text. */
+.cardMain {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 4px 0;
+}
+
+.cardIcon {
+  font-size: 48px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
+  flex-shrink: 0;
+}
+
+.cardTempBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cardTemp {
+  font-size: 38px;
+  font-weight: 300;
+  color: #1c1008;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+.cardDesc {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(42, 26, 14, 0.55);
+}
+
+.cardFeels {
+  font-size: 11px;
+  color: rgba(42, 26, 14, 0.36);
+  margin-top: 1px;
+}
+
+/* Row of three tiles showing hi/lo, wind, and humidity. */
+.cardStats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 12px;
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.90);
+}
+
+.statValue {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1c1008;
+  white-space: nowrap;
+}
+
+.statLabel {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(42, 26, 14, 0.35);
+}
+
+/* Lightly tinted banner showing a short weather tip. */
+.tip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  background: rgba(255, 92, 47, 0.06);
+  border: 1px solid rgba(255, 92, 47, 0.14);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.70);
+}
+
+.tipEmoji {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.tipText {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(42, 26, 14, 0.65);
+  line-height: 1.45;
+}
+
+/* Small credit line required by ECCC Open Licence v2.1. */
+.attribution {
+  margin: 0;
+  font-size: 8.5px;
+  font-weight: 400;
+  color: rgba(42, 26, 14, 0.28);
+  letter-spacing: 0.02em;
+  text-align: right;
+}

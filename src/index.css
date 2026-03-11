@@ -1,0 +1,103 @@
+/* index.css — DAYFLOW Global
+   Brand: #FF5C2F orange · #FFF5EE cream · warm white background
+   Aesthetic: light airy glassmorphism, ~45% opacity panels
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Solid white background */
+  background: #fff;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  color: #2a1a0e;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient soft glow orbs — white, very subtle */
+#root::before {
+  content: '';
+  position: fixed;
+  width: 900px;
+  height: 900px;
+  top: -350px;
+  left: -250px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(200, 200, 200, 0.08) 0%,
+    rgba(220, 220, 220, 0.03) 50%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orb1 22s ease-in-out infinite alternate;
+}
+
+#root::after {
+  content: '';
+  position: fixed;
+  width: 700px;
+  height: 700px;
+  bottom: -250px;
+  right: -100px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(210, 210, 210, 0.06) 0%,
+    rgba(230, 230, 230, 0.02) 55%,
+    transparent 70%
+  );
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orb2 28s ease-in-out infinite alternate;
+}
+
+@keyframes orb1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(80px, 60px) scale(1.08); }
+  100% { transform: translate(-40px, 100px) scale(0.96); }
+}
+@keyframes orb2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-70px, -50px) scale(1.1); }
+  100% { transform: translate(50px, -80px) scale(0.94); }
+}
+
+/* Page layout */
+.dayflowLayout {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Select dark-mode option fix */
+select option {
+  background: #fff5ee;
+  color: #2a1a0e;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,92,47,0.6)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px !important;
+  cursor: pointer;
+}

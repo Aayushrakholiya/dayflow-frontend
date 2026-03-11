@@ -1,0 +1,83 @@
+/* ─── MainPage layout ────────────────────────────────────────────────────────── */
+
+.root {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Location permission banner ─────────────────────────────────────────────── */
+
+.permissionBanner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  background: rgba(240, 96, 58, 0.97);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 9px 20px;
+  font-size: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 12px rgba(240, 96, 58, 0.35);
+}
+
+.permissionBannerText {
+  flex: 1;
+  font-weight: 500;
+}
+
+.permissionBannerBtn {
+  background: white;
+  color: #f0603a;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.permissionBannerBtn:hover {
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* ─── Main content area ───────────────────────────────────────────────────────── */
+
+.main {
+  margin-left: 348px;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  z-index: 1001;
+  transition: padding-top 0.2s ease;
+}
+
+.mainWithBanner {
+  padding-top: 38px;
+}
+
+/* ─── Location panel backdrop ─────────────────────────────────────────────────── */
+
+.locationBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}

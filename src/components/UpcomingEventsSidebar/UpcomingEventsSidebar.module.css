@@ -1,0 +1,21 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 98px;
+  width: 250px;
+  height: 100vh;
+  background: rgba(255, 253, 250, 0.82);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-right: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    2px 0 16px rgba(255, 92, 47, 0.06),
+    inset -1px 0 0 rgba(255, 255, 255, 0.5);
+  z-index: 999;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
