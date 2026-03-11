@@ -6,7 +6,7 @@ import LocationPanel from "../components/LocationPanel/LocationPanel";
 import type { CalendarEvent } from "../components/EventCreationModel/EventCreationModel";
 import { markEventCompleted } from "../api";
 import { useLocationPermission } from "../components/LocationServices/useLocationPermission";
-import styles from "./main.module.css";
+import styles from "./Main.module.css";
 
 export default function MainPage() {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
