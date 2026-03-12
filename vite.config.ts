@@ -11,4 +11,22 @@ export default defineConfig({
      },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-router-dom')) {
+            return 'vendor';
+          }
+          if (id.includes('node_modules/@mui')) {
+            return 'mui';
+          }
+          if (id.includes('node_modules/@react-google-maps') || id.includes('node_modules/leaflet')) {
+            return 'geo';
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+  },
 });
