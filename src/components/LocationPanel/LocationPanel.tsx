@@ -19,6 +19,8 @@ declare global {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     L: any;
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  var L: any;
 }
 
 function loadLeaflet(): Promise<void> {
