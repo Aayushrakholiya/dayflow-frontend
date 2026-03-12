@@ -21,7 +21,7 @@ import {
 } from "./CalendarUtils";
 
 import { CalendarHeader, MonthView, TimeGrid } from "./CalendarViews";
-import styles from "./calendar.module.css";
+import styles from "./Calendar.module.css";
 import EventCreationModel, { type CalendarEvent } from "../EventCreationModel/EventCreationModel";
 
 const TIME_COLUMN_WIDTH = 48;
