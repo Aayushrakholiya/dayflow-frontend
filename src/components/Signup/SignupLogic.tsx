@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+
 export const useSignupLogic = () => {
   const [form, setForm] = useState({
     fullName: "",
@@ -87,7 +89,7 @@ export const useSignupLogic = () => {
     }
 
     // this will send the signup request to the backend 
-    const res = await fetch("http://localhost:4000/api/auth/signup", {
+    const res = await fetch(`${API_URL}/api/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+
 export const useLoginLogic = () => {
   const navigate = useNavigate();
 
@@ -46,7 +48,7 @@ export const useLoginLogic = () => {
     }
 
     // this will send the login request to the backend
-    const res = await fetch("http://localhost:4000/api/auth/login", {
+    const res = await fetch(`${API_URL}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
