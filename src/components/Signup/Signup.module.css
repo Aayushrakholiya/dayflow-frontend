@@ -1,0 +1,9 @@
+/* Row of trust badges shown below the submit button */
+.trustBadges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}

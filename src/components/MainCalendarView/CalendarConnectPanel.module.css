@@ -1,0 +1,292 @@
+.panel {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  width: 340px;
+  font-family: inherit;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.panelTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 15px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+.closeButton:hover {
+  color: #374151;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.panelSubtitle {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0 0 16px;
+  line-height: 1.4;
+}
+
+/* ── Provider rows ───────────────────────────────────────────────────────── */
+
+.providers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.providerRow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.025);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.providerInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.providerIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.providerMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.providerName {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.lastSynced {
+  font-size: 11px;
+  color: #22c55e;
+  font-weight: 500;
+}
+
+.notConnected {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* ── Action buttons ──────────────────────────────────────────────────────── */
+
+.providerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.connectButton {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition:
+    opacity 0.15s,
+    transform 0.1s;
+  white-space: nowrap;
+}
+.connectButton:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+.connectButton:active {
+  transform: translateY(0);
+}
+
+.connectButton_google {
+  background: #4285f4;
+  color: #fff;
+  border-color: #3367d6;
+}
+
+.connectButton_microsoft {
+  background: #0078d4;
+  color: #fff;
+  border-color: #005a9e;
+}
+
+.syncButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  color: #374151;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    transform 0.15s;
+}
+.syncButton:hover:not(:disabled) {
+  background: #f3f4f6;
+  color: #111827;
+  transform: rotate(45deg);
+}
+.syncButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.disconnectButton {
+  padding: 5px 11px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.06);
+  color: #ef4444;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+  white-space: nowrap;
+}
+.disconnectButton:hover {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* ── Provider copyright notice ───────────────────────────────────────────── */
+
+.providerCopyright {
+  font-size: 10px;
+  color: #9ca3af;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.providerCopyrightLink {
+  color: #9ca3af;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-style: dotted;
+  cursor: pointer;
+  transition: color 0.12s;
+}
+.providerCopyrightLink:hover {
+  color: #6b7280;
+}
+
+/* ── Error ───────────────────────────────────────────────────────────────── */
+
+.errorMsg {
+  width: 100%;
+  margin: 4px 0 0;
+  font-size: 11.5px;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.06);
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+/* ── Spinner ─────────────────────────────────────────────────────────────── */
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  border-top-color: #374151;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* ── Mobile: panel fills the popover width ───────────────────────────────── */
+@media (max-width: 768px) {
+  .panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    border-radius: 18px;
+    /* Prevent text from overflowing */
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .panelTitle {
+    font-size: 14px;
+  }
+
+  .panelSubtitle {
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .providerRow {
+    padding: 10px 12px;
+  }
+
+  .providerName {
+    font-size: 13px;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  .connectButton,
+  .disconnectButton {
+    font-size: 12px;
+    padding: 7px 12px;
+    min-height: 36px;
+  }
+
+  .syncButton {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+}

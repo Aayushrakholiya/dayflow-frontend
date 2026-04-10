@@ -1,0 +1,42 @@
+/* ── Prevent horizontal scroll on MOBILE only ───────────────────────────── */
+
+@media (max-width: 768px) {
+  :global(html),
+  :global(body) {
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* ── Safe-area inset support (iPhone home bar) ───────────────────────────── */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  @media (max-width: 768px) {
+    :global(aside[aria-label="Sidebar"]) {
+      padding-bottom: env(safe-area-inset-bottom);
+      height: calc(68px + env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* ── Conflict panel: keep below top nav bar ──────────────────────────────── */
+
+@media (max-width: 768px) {
+  :global([data-conflict-panel]) {
+    top: 74px !important;
+    bottom: auto !important;
+  }
+}
+
+/* ── Location panel anchor ───────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  :global([data-location-anchor]) {
+    top: auto !important;
+    top: 74px !important;
+    right: 12px !important;
+    left: 12px !important;
+    width: auto !important;
+  }
+}

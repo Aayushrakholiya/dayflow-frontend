@@ -1,0 +1,198 @@
+/* ───────────────── Floating Panel ───────────────── */
+
+.floatingPanel {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 340px;
+  max-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 3000;
+
+  /* Glass effect */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ───────────────── Header ───────────────── */
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.panelTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1c1008;
+  letter-spacing: 0.02em;
+}
+
+.collapseBtn {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  color: rgba(28, 16, 8, 0.6);
+  transition: transform 0.15s ease;
+}
+.collapseBtn:hover {
+  color: #ff5c2f;
+  transform: scale(1.1);
+}
+
+/* ───────────────── Body ───────────────── */
+
+.panelBody {
+  overflow-y: auto;
+  padding: 6px;
+}
+
+/* ───────────────── Warning Row ───────────────── */
+
+.warningRow {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  margin-bottom: 6px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.5);
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+  transition: all 0.15s ease;
+}
+
+.warningRow:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.12),
+    0 0 16px rgba(255, 92, 47, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* ─── Row Variants ─── */
+
+.rowOverlap {
+  border-left: 3px solid rgba(255, 92, 47, 0.8);
+}
+
+
+.rowTight {
+  border-left: 3px solid rgba(255, 184, 0, 0.8);
+}
+
+/* ───────────────── Content ───────────────── */
+
+.icon {
+  font-size: 16px;
+  margin-top: 2px;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.message {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1c1008;
+  line-height: 1.3;
+}
+
+.sources {
+  font-size: 10px;
+  color: rgba(28, 16, 8, 0.5);
+}
+
+/* ───────────────── Actions ───────────────── */
+
+.actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+/* Buttons base */
+.actions button {
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 8px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  background: rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  transition: all 0.15s ease;
+}
+
+/* Edit */
+.editBtn:hover {
+  background: rgba(255, 92, 47, 0.15);
+  border-color: rgba(255, 92, 47, 0.4);
+  color: #ff5c2f;
+}
+
+/* Snooze */
+.snoozeBtn:hover {
+  background: rgba(255, 184, 0, 0.2);
+  border-color: rgba(255, 184, 0, 0.5);
+}
+
+/* Dismiss */
+.dismissBtn {
+  padding: 4px 6px;
+}
+.dismissBtn:hover {
+  background: rgba(200, 30, 30, 0.25);
+  border-color: rgba(200, 30, 30, 0.6);
+  color: white;
+}
+
+/* ───────────────── Scrollbar ───────────────── */
+
+.panelBody::-webkit-scrollbar {
+  width: 4px;
+}
+.panelBody::-webkit-scrollbar-thumb {
+  background: rgba(255, 92, 47, 0.25);
+  border-radius: 99px;
+}
+.panelBody::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 92, 47, 0.5);
+}

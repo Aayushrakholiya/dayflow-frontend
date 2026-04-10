@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* Page entry animation */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle float for the badge pills */
+@keyframes floatBadge {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Full-screen two-column layout */
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Left orange brand panel */
+.logoSection {
+  width: 55%;
+  min-width: 55%;
+  max-width: 55%;
+  background: #f97316;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating badge pills scattered around the left panel */
+.floatingBadge {
+  position: absolute;
+  background: #ffffff;
+  color: #1a1107;
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(10px, 1.1vw, 13px);
+  font-weight: 600;
+  padding: clamp(5px, 0.6vw, 8px) clamp(10px, 1.2vw, 16px);
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: floatBadge 4s ease-in-out infinite;
+}
+
+/* Green "Free forever" badge variant */
+.floatingBadgeFree {
+  position: absolute;
+  background: #ffffff;
+  color: #1a1107;
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(10px, 1.1vw, 13px);
+  font-weight: 600;
+  padding: clamp(5px, 0.6vw, 8px) clamp(10px, 1.2vw, 16px);
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: floatBadge 5s ease-in-out infinite reverse;
+}
+
+/* Centred content column inside the left panel */
+.panelContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 1.5vh, 16px);
+  animation: fadeSlideUp 0.7s ease both;
+  padding: 0 clamp(16px, 3vw, 32px);
+  max-width: min(480px, 80%);
+  width: 100%;
+  z-index: 1;
+}
+
+/* Large "Dayflow." wordmark — clamp prevents overflow at any viewport size */
+.wordmark {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 5.5vw, 76px);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-align: center;
+}
+
+/* Lighter dot after the wordmark */
+.wordmarkDot {
+  color: #fff3e0;
+}
+
+/* Tagline below the wordmark */
+.panelTagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* White preview card showing a sample day schedule */
+.previewCard {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: clamp(14px, 1.8vh, 20px) clamp(14px, 1.8vw, 22px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Three coloured dots at the top of the card */
+.previewDots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e5e7eb;
+}
+
+/* "TODAY — THURSDAY" label */
+.previewDate {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #9ca3af;
+  margin: 0 0 12px 0;
+}
+
+/* Single event row inside the card */
+.previewEvent {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.previewEvent:last-of-type {
+  border-bottom: none;
+}
+
+/* Time column in orange */
+.previewTime {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f97316;
+  white-space: nowrap;
+  min-width: 58px;
+  padding-top: 2px;
+}
+
+/* Title and meta stacked in a column */
+.previewEventBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.previewTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.previewMeta {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+/* Summary line at the bottom of the card */
+.previewFooter {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #f97316;
+  background: #fff7ed;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+/* Right form panel — background colour set via MUI sx in AuthBaseLayout */
+.formSection {
+  position: relative;
+  width: 45%;
+  min-width: 45%;
+  max-width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow-y: auto;
+  transition: background-color 0.25s ease;
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 400px;
+  animation: fadeSlideUp 0.65s ease 0.1s both;
+}
+
+/* Hide badges when viewport is too narrow for them to sit safely */
+@media (max-width: 1200px) {
+  .floatingBadge,
+  .floatingBadgeFree {
+    display: none;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .logoSection {
+    width: 50%;
+    min-width: 50%;
+    max-width: 50%;
+  }
+
+  .formSection {
+    width: 50%;
+    min-width: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Mobile — stacks vertically */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .logoSection {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 40vh;
+    min-height: 220px;
+  }
+
+  .floatingBadge,
+  .floatingBadgeFree {
+    display: none;
+  }
+
+  .wordmark {
+    font-size: 42px;
+  }
+
+  /* Hide the preview card on small screens to save space */
+  .previewCard {
+    display: none;
+  }
+
+  .formSection {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 60vh;
+    padding: 24px 20px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .logoSection {
+    height: 28vh;
+    min-height: 160px;
+  }
+
+  .formSection {
+    height: 72vh;
+    padding: 16px;
+  }
+}
