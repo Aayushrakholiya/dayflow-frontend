@@ -17,7 +17,7 @@ import type { ImportedCalendarEvent } from "../components/MainCalendarView/Calen
 import { markEventCompleted } from "../api";
 import { useLocationPermission } from "../components/LocationServices/useLocationPermission";
 import { useFCMInitializer } from "../hooks/useFCMInitializer";
-import styles from "./main.module.css";
+import styles from "./Main.module.css";
 
 export default function MainPage() {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
