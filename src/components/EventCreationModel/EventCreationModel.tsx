@@ -733,7 +733,18 @@ export default function EventCreationModel({
         className={styles.modal}
         style={
           position && window.innerWidth > 768
-            ? { position: "fixed", top: position.top, left: position.left }
+            ? {
+                position: "fixed",
+                top: position.top,
+                left: position.left,
+                // Clamp height to remaining viewport space below the modal's top
+                // edge so the box never bleeds off the bottom of the screen.
+                // Do NOT set overflowY here — the inner formPane already scrolls
+                // (overflow-y: auto in CSS) and the modal needs overflow: visible
+                // (from CSS) so the location autocomplete dropdown can render
+                // outside the modal bounds without being clipped.
+                maxHeight: `calc(100vh - ${position.top}px - 8px)`,
+              }
             : undefined
         }
       >

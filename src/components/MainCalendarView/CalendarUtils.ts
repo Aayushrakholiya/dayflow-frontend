@@ -297,7 +297,7 @@ export function useDragToCreate({
 // ─────────────────────────────────────────────────────────────────────────────
 const TIME_COLUMN_WIDTH = 48;
 const MODAL_WIDTH = 420;
-const MODAL_HEIGHT = 400;
+const MODAL_HEIGHT = 560; // conservative upper-bound so calcPosition reserves enough room below
 const GAP = 8;
 
 interface ModalPositionOptions {
