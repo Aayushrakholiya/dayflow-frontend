@@ -163,10 +163,14 @@ export async function getImportedEvents(
   if (!res.ok) throw new Error("Failed to fetch imported events");
   const data = await res.json();
 
-  return (data.events ?? []).map((ev: ImportedCalendarEvent & { date: string }) => ({
-    ...ev,
-    date: new Date(ev.date),
-  }));
+  return (data.events ?? []).map((ev: ImportedCalendarEvent & { date: string }) => {
+    // Parse only the date portion ("YYYY-MM-DD") as LOCAL midnight so isSameDay()
+    // comparisons work correctly in all timezones.  Using new Date(utcString)
+    // converts UTC midnight to local time, shifting the day backwards in UTC−
+    // timezones (e.g. April 13 00:00 UTC → April 12 19:00 EST).
+    const dp = ev.date.slice(0, 10).split("-").map(Number);
+    return { ...ev, date: new Date(dp[0], dp[1] - 1, dp[2]) };
+  });
 }
 
 // ── Update location override ──────────────────────────────────────────────────
@@ -183,5 +187,6 @@ export async function updateImportedEventLocation(
   });
   if (!res.ok) throw new Error("Failed to update location");
   const data = await res.json();
-  return { ...data.event, date: new Date(data.event.date) };
+  const dp = (data.event.date as string).slice(0, 10).split("-").map(Number);
+  return { ...data.event, date: new Date(dp[0], dp[1] - 1, dp[2]) };
 }
