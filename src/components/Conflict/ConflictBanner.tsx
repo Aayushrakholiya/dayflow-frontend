@@ -8,7 +8,7 @@
 */ 
 
 import { useState } from "react";
-import styles from "./ConflictBanner.module.css";
+import styles from "./Conflictbanner.module.css";
 import type { ConflictWarning, UnifiedEvent } from "./ConflictType";
 
 // ── Props ─────────────────────────────────────────────────────────────────────
