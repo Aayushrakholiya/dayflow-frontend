@@ -312,6 +312,9 @@ export function useModalPosition({ gridRef, isDayView, numCols = 7 }: ModalPosit
       if (!gridRef.current) return null;
 
       const gridEl = gridRef.current;
+      // getBoundingClientRect gives the grid's position relative to the viewport.
+      // This is needed because the modal uses position:fixed (viewport coords).
+      const rect = gridEl.getBoundingClientRect();
 
       const gridWidth = gridEl.clientWidth - TIME_COLUMN_WIDTH;
       const colWidth = isDayView ? gridWidth : gridWidth / numCols;
@@ -320,9 +323,11 @@ export function useModalPosition({ gridRef, isDayView, numCols = 7 }: ModalPosit
       const colRight = colLeft + colWidth;
 
       const containerWidth = gridEl.clientWidth;
+      const viewportWidth = window.innerWidth;
 
       let left: number;
 
+      // Determine left in local grid coords, then convert to viewport coords
       if (containerWidth - colRight - GAP >= MODAL_WIDTH) {
         left = colRight + GAP;
       }
@@ -336,9 +341,15 @@ export function useModalPosition({ gridRef, isDayView, numCols = 7 }: ModalPosit
         );
       }
 
-      let top = startHour * ROW_HEIGHT - gridEl.scrollTop;
+      // Convert local grid X → viewport X
+      left = left + rect.left;
+      // Clamp so the modal never bleeds off the right edge of the viewport
+      left = Math.max(GAP, Math.min(left, viewportWidth - MODAL_WIDTH - GAP));
 
-      const maxTop = Math.max(GAP, gridEl.clientHeight - MODAL_HEIGHT - GAP);
+      // Convert local grid Y → viewport Y (accounting for scroll offset)
+      let top = startHour * ROW_HEIGHT - gridEl.scrollTop + rect.top;
+
+      const maxTop = Math.max(GAP, window.innerHeight - MODAL_HEIGHT - GAP);
       top = Math.max(GAP, Math.min(top, maxTop));
 
       return { top, left };
