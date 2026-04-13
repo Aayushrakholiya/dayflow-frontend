@@ -31,7 +31,7 @@ import {
 } from "./CalendarUtils";
 
 import { CalendarHeader, MonthView, TimeGrid, MobileViewSwitcher, MobileHeader, MobileFAB } from "./CalendarViews";
-import styles from "./calendar.module.css";
+import styles from "./Calendar.module.css";
 import EventCreationModel, { type CalendarEvent } from "../EventCreationModel/EventCreationModel";
 import {
   type ImportedCalendarEvent,

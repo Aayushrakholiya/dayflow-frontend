@@ -22,7 +22,7 @@ import {
   formatDecimalHour12,
   buildTimeSlots,
 } from "./CalendarUtils";
-import styles from "./calendar.module.css";
+import styles from "./Calendar.module.css";
 import deleteIcon from "../../assets/icon_delete.png";
 import WeatherWidget, { WeatherForecastPill } from "../WeatherWidget/WeatherWidget";
 import type { ForecastDay } from "../WeatherWidget/WeatherWidget";
