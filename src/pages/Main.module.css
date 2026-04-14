@@ -25,6 +25,61 @@
   padding-top: 38px;
 }
 
+/* ── Location permission denied banner ──────────────────────────────────────── */
+
+.permissionBanner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 38px;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(90deg, #c0392b, #e74c3c);
+  box-shadow: 0 2px 8px rgba(192, 57, 43, 0.35);
+  padding: 0 16px;
+}
+
+.permissionBannerText {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.permissionBannerBtn {
+  flex-shrink: 0;
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+.permissionBannerBtn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: #ffffff;
+  transform: translateY(-1px);
+}
+.permissionBannerBtn:active {
+  transform: scale(0.95);
+}
+
 /* Mobile layout */
 @media (max-width: 768px) {
   .root {
@@ -45,6 +100,11 @@
 
   .mainWithBanner {
     padding-top: calc(58px + 38px);
+  }
+
+  /* On mobile the top bar is 58 px tall — push the banner below it */
+  .permissionBanner {
+    top: 58px;
   }
 }
 .sidebar {
