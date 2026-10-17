@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# ⚛️ DayFlow — Frontend
 
-Currently, two official plugins are available:
+**The React 19 + Vite client for [DayFlow](https://github.com/Aayushrakholiya/Dayflow_capstone), the smart calendar that makes your day easy.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> This is the **frontend deployment repo** — the API lives at [dayflow-backend](https://github.com/Aayushrakholiya/dayflow-backend), and the complete monorepo source lives at [Dayflow_capstone](https://github.com/Aayushrakholiya/Dayflow_capstone).
 
-## React Compiler
+<br>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+[![▶️ Demo Video](https://img.shields.io/badge/▶️_Demo_Video-Watch_on_YouTube-FF0000?style=for-the-badge&labelColor=1a1a2e)](https://youtu.be/wx2OzbUkqes)
 
-## Expanding the ESLint configuration
+<br>
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+![React](https://img.shields.io/badge/React_19-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+![MUI](https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=mui&logoColor=white)
+![Leaflet](https://img.shields.io/badge/Leaflet_Maps-199900?style=flat-square&logo=leaflet&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase_FCM-FFCA28?style=flat-square&logo=firebase&logoColor=black)
+![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+</div>
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📌 Table of Contents
+
+- [About](#-about)
+- [What This Repo Is](#-what-this-repo-is)
+- [UI Overview](#-ui-overview)
+- [Getting Started](#-getting-started)
+
+## 👋 About
+
+DayFlow is a smart calendar web app that brings events, tasks, location, weather, and notifications into one system. This repo builds the interface users actually touch: a polished calendar experience with Material UI components, an interactive map for location picking, and Firebase push notifications delivered right in the browser.
+
+## 📦 What This Repo Is
+
+The full application was originally one codebase ([Dayflow_capstone](https://github.com/Aayushrakholiya/Dayflow_capstone)). Deploying it as a single unit proved impractical, so the frontend and backend were **split into standalone repos and deployed separately to Vercel** — and it works exactly as intended.
+
+- This repo = **frontend only**, configured for Vercel with SPA rewrites (`vercel.json` routes everything to `index.html`)
+- Talks to the backend API deployed from [dayflow-backend](https://github.com/Aayushrakholiya/dayflow-backend)
+- Kept in sync with the monorepo source
+
+## 🖥️ UI Overview
+
+| Area | Components |
+| --- | --- |
+| **Auth** | Signup, Login, Forgot Password (with polished auth screens) |
+| **Calendar** | `MainCalendarView` — day/week/month views of all events |
+| **Event management** | `EventCreationModel`, conflict checker (`Conflict`), `DailySummary` |
+| **Upcoming** | `UpcomingEventsSidebar` so tomorrow is always visible |
+| **Location** | `LocationPanel` + `LocationServices` with interactive map (Leaflet / Google Maps) |
+| **Weather** | `WeatherWidget` — the forecast where your events happen |
+| **Notifications** | `fcmNotificationService` — Firebase Cloud Messaging push in-browser |
+| **Navigation** | `Sidebar` + `AppLayout` shell, plus About & Help pages |
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/Aayushrakholiya/dayflow-frontend.git
+cd dayflow-frontend
+npm install
+npm run dev       # Vite dev server
+npm run build     # type-check + production build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Point the API base URL at your backend (local or the deployed one) and you're in.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+<div align="center">
+
+⭐ **Star this repo if you find it useful** ⭐
+
+</div>
